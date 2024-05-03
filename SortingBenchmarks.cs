@@ -12,10 +12,12 @@ namespace Lab3
     [MarkdownExporter, AsciiDocExporter, HtmlExporter, CsvExporter]
     public class SortingBenchmarks
 	{
-        [Params(100, 1000, 10_000)]
+        [Params(1_000, 10_000, 100_000, 1_000_000, 10_000_000)]
         public int N;
 
         [Params(OrderingType.Random, OrderingType.Reversed, OrderingType.NearlySorted)]
+
+        //[Params(OrderingType.Random)]
         public OrderingType orderingType;
 
         private List<int> list;
@@ -70,30 +72,56 @@ namespace Lab3
             list[index2] = temp;
         }
 
-        [Benchmark]
-        public void BubbleSort()
-        {
-            BubbleSort<int> bubbleSort = new BubbleSort<int>();
+        //[Benchmark]
+        //public void BubbleSort()
+        //{
+        //    BubbleSort<int> bubbleSort = new BubbleSort<int>();
 
-            bubbleSort.Sort(ref list);
+        //    bubbleSort.Sort(ref list);
+        //}
+
+        //[Benchmark]
+        //public void InsertionSort()
+        //{
+        //    InsertionSort<int> insertionSort = new InsertionSort<int>();
+
+        //    insertionSort.Sort(ref list);
+        //}
+
+        //[Benchmark]
+        //public void MergeSort()
+        //{
+        //    MergeSort<int> mergeSort = new MergeSort<int>();
+
+        //    mergeSort.Sort(ref list);
+        //}
+
+        //[Benchmark]
+        //public void HeapSort()
+        //{
+        //    HeapSort<int> heapSort = new HeapSort<int>();
+
+        //    heapSort.Sort(ref list);
+        //}
+
+
+        //[Benchmark]
+        //public void RadixSort()
+        //{
+        //    RadixSort radixSort = new RadixSort();
+
+        //    radixSort.Sort(array);
+        //}
+
+        [Benchmark]
+        public void BucketSort()
+        {
+            BucketSort bucketSort = new BucketSort();
+
+            bucketSort.Sort(array);
         }
 
-        [Benchmark]
-        public void InsertionSort()
-        {
-            InsertionSort<int> insertionSort = new InsertionSort<int>();
 
-            insertionSort.Sort(ref list);
-        }
-
-
-        [Benchmark]
-        public void RadixSort()
-        {
-            RadixSort radixSort = new RadixSort();
-
-            radixSort.Sort( array );
-        }
 
 
         private List<int> GenerateRandomIntList(int length, int maxValue)
